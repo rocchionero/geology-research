@@ -3,26 +3,26 @@ import pandas as pd
 
 
 def main():
-    taxon_file = "geology-research/data/biv.csv"
+    taxon_file = "/data/biv.csv"
     taxon = read_csv(taxon_file, False)
 
-    read_biv = read_csv("biv.csv", True)
+    read_biv = read_csv("/data/biv.csv", True)
     biv_dict = map_(read_biv, 5, 13)
     for k in biv_dict:
         print(k + " -> \"" + biv_dict[k] + "\"")
-    write_dict(biv_dict, "biv_dict.csv", col_header=["genus", "higher_taxon"])
+    write_dict(biv_dict, "/data/biv_dict.csv", col_header=["genus", "higher_taxon"])
 
-    read_gast = read_csv("gast.csv", True)
+    read_gast = read_csv("/data/gast.csv", True)
     gast_dict = map_force_val(read_gast, 5, "Gastropod")
     for k in gast_dict:
         print(k + " -> \"" + gast_dict[k] + "\"")
-    write_dict(gast_dict, "gast_dict.csv", col_header=["genus", "higher_taxon"])
+    write_dict(gast_dict, "/data/gast_dict.csv", col_header=["genus", "higher_taxon"])
 
-    read_brach = read_csv("brach.csv", True)
+    read_brach = read_csv("/data/brach.csv", True)
     brach_dict = map_force_val(read_brach, 5, "Brachiopod")
     for k in brach_dict:
         print(k + "-> \"" + brach_dict[k] + "\"")
-    write_dict(brach_dict, "brach_dict.csv", col_header=["genus", "higher_taxon"])
+    write_dict(brach_dict, "/data/brach_dict.csv", col_header=["genus", "higher_taxon"])
 
     biv_list = list(biv_dict.keys())
     gast_list = list(gast_dict.keys())
@@ -50,18 +50,18 @@ def main():
     coocc = over.T.dot(over)
     print(coocc)
 
-    coocc.to_csv("coocc.csv")
+    coocc.to_csv("/data/coocc.csv")
 
 
 
 
     df = pd.DataFrame(data=mat[1:], columns=mat[0])
     print(df)
-    df.to_csv("df.csv")
+    df.to_csv("/data/df.csv")
 
     df_t = df.T
     print(df_t.corr())
-    df_t.to_csv("df_t.csv")
+    df_t.to_csv("/data/df_t.csv")
 
 
     #total = []
