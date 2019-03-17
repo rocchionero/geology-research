@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def main():
-    taxon_file = "C://Melissa//occhionero//Research//biv.csv"
+    taxon_file = "geology-research/data/biv.csv"
     taxon = read_csv(taxon_file, False)
 
     read_biv = read_csv("biv.csv", True)
