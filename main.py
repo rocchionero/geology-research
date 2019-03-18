@@ -57,11 +57,11 @@ def main():
 
     df = pd.DataFrame(data=mat[1:], columns=mat[0])
     print(df)
-    df.to_csv("df.csv")
+    df.to_csv("data/df.csv")
 
     df_t = df.T
     print(df_t.corr())
-    df_t.to_csv("df_t.csv")
+    df_t.to_csv("data/df_t.csv")
 
 
     #total = []
