@@ -1,4 +1,5 @@
 from utility import *
+from classes import *
 import pandas as pd
 
 
@@ -53,8 +54,6 @@ def main():
     coocc.to_csv("data/coocc.csv")
 
 
-
-
     df = pd.DataFrame(data=mat[1:], columns=mat[0])
     print(df)
     df.to_csv("data/df.csv")
@@ -62,6 +61,28 @@ def main():
     df_t = df.T
     print(df_t.corr())
     df_t.to_csv("data/df_t.csv")
+
+    df_brach = pd.read_csv("data/brach.csv")
+    brach_collect = df_brach.collection_no
+    brach_collect_freq = CountFrequency(brach_collect)
+    sorted_brach = sorted(brach_collect_freq.items(), key=lambda kv: -kv[1])
+    print(sorted_brach)
+
+
+
+
+    #df_gast = pd.read_csv("data/gast.csv")
+    #gast_collect = df_gast.collection_no
+
+
+
+    #coll_count = Counter()
+    #for x in brach_collect:
+        #coll_count.add(x)
+
+
+
+
 
 
     #total = []
@@ -72,6 +93,7 @@ def main():
 
     #with pd.option_context('display.max_rows', None, 'display.max_columns', None):
         #print(df)
+
 
 
 if __name__ == "__main__":
