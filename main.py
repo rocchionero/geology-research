@@ -1,7 +1,6 @@
 from utility import *
-from classes import *
 import pandas as pd
-
+import matplotlib.pylab as plt
 
 def main():
     taxon_file = "data/biv.csv"
@@ -69,6 +68,9 @@ def main():
     print(sorted_brach)
 
 
+    y,x = zip(*sorted_brach)
+    plt.plot(x, y)
+    plt.show()
 
 
     #df_gast = pd.read_csv("data/gast.csv")
