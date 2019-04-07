@@ -65,22 +65,32 @@ def main():
     brach_collect = df_brach.collection_no
     brach_collect_freq = CountFrequency(brach_collect)
     sorted_brach = sorted(brach_collect_freq.items(), key=lambda kv: -kv[1])
-    print(sorted_brach)
+    #print(sorted_brach)
 
-
-    y,x = zip(*sorted_brach)
+    x,y = zip(*sorted_brach)
     plt.plot(x, y)
     plt.show()
 
+    #df_biv = pd.read_csv("data/biv.csv")
+    #biv_collect = df_biv.collection_no
+    #biv_collect_freq = CountFrequency(biv_collect)
+    #sorted_biv = sorted(biv_collect_freq.items(), key=lambda kv: - kv[1])
 
     #df_gast = pd.read_csv("data/gast.csv")
     #gast_collect = df_gast.collection_no
+    #gast_collect_freq = CountFrequency(gast_collect)
+    #sorted_gast = sorted(gast_collect_freq.items(), key=lambda kv: -kv[1])
+
+    taxon_list = ["brachipod", "gastropod", "bivalve"]
+
+    randsite_dict = RandTaxa(sorted_brach, taxon_list)
+    print(randsite_dict)
 
 
 
-    #coll_count = Counter()
-    #for x in brach_collect:
-        #coll_count.add(x)
+
+
+
 
 
 

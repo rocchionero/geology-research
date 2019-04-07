@@ -1,4 +1,5 @@
 import csv
+import random
 
 
 def write_dict(d, write_loc, col_header=[]):
@@ -68,10 +69,10 @@ def new_list(dict,list):
 
     return list
 
-def CountFrequency(my_dict):
+def CountFrequency(dict):
 
     freq = {}
-    for item in my_dict:
+    for item in dict:
         if item in freq:
             freq[item] += 1
         else:
@@ -81,4 +82,24 @@ def CountFrequency(my_dict):
         print("% d : % d"%(key, value))
 
     return freq
+
+
+def RandTaxa(dict, list):
+    randtaxa= {}
+    for item in dict:
+        if item != 1:
+            for k in list:
+                rand_index = list[random.randint(0,2)]
+            randtaxa[item] = rand_index
+
+        else:
+            randtaxa[item] = item
+
+    return randtaxa
+
+
+
+
+
+
 
