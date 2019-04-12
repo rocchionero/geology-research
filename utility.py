@@ -1,5 +1,6 @@
 import csv
 import random
+from collections import Counter
 
 
 def write_dict(d, write_loc, col_header=[]):
@@ -91,11 +92,22 @@ def RandTaxa(dict, list):
             for k in list:
                 rand_index = list[random.randint(0,2)]
             randtaxa[item] = rand_index
-
         else:
             randtaxa[item] = item
 
     return randtaxa
+
+def ripleyfunction(dict):
+    result = {}
+    for k in result:
+        if 'bivalve' in k:
+            result[k['bivalve']] = result.get(k['bivalve'], 0) + 1
+        elif 'gastropod' in k:
+            result[k['gastropod']] = result.get(k['gastropod'], 0) + 1
+        else:
+            result[k['brachipod']] = result.get(k['brachipod'], 0) + 1
+
+    return result
 
 
 

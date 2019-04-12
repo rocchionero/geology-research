@@ -1,6 +1,6 @@
 from utility import *
 import pandas as pd
-import matplotlib.pylab as plt
+#import matplotlib.pylab as plt
 
 def main():
     taxon_file = "data/biv.csv"
@@ -67,9 +67,9 @@ def main():
     sorted_brach = sorted(brach_collect_freq.items(), key=lambda kv: -kv[1])
     #print(sorted_brach)
 
-    x,y = zip(*sorted_brach)
-    plt.plot(x, y)
-    plt.show()
+    #y,x = zip(*sorted_brach)
+    #plt.plot(y, x)
+    #plt.show()
 
     #df_biv = pd.read_csv("data/biv.csv")
     #biv_collect = df_biv.collection_no
@@ -86,7 +86,8 @@ def main():
     randsite_dict = RandTaxa(sorted_brach, taxon_list)
     print(randsite_dict)
 
-
+    ripley_dict = ripleyfunction(randsite_dict)
+    print(ripley_dict)
 
 
 
