@@ -2,6 +2,7 @@ from utility import *
 import pandas as pd
 #import matplotlib.pylab as plt
 
+
 def main():
     taxon_file = "data/biv.csv"
     taxon = read_csv(taxon_file, False)
@@ -65,7 +66,7 @@ def main():
     brach_collect = df_brach.collection_no
     brach_collect_freq = CountFrequency(brach_collect)
     sorted_brach = sorted(brach_collect_freq.items(), key=lambda kv: -kv[1])
-    #print(sorted_brach)
+    print(sorted_brach)
 
     #y,x = zip(*sorted_brach)
     #plt.plot(y, x)
@@ -86,9 +87,26 @@ def main():
     randsite_dict = RandTaxa(sorted_brach, taxon_list)
     print(randsite_dict)
 
-    ripley_dict = ripleyfunction(randsite_dict)
-    print(ripley_dict)
+    _gastropod, _bivalve, _brachipod = 0, 0, 0
+    for k, v in randsite_dict.items():
+        if "brachipod" in v:
+            _brachipod += 1
+        elif "bivalve" in v:
+            _bivalve += 1
+        elif "gastropod" in v:
+            _gastropod += 1
+    average = (_gastropod + _bivalve + _brachipod)/3
 
+
+    print("(gastro, bivalve, brachipod):= " + str(_gastropod) + ", " + str(_bivalve) + ", " + str(_brachipod))
+    print(average)
+
+    lat1 = 52.2296756
+    lon1 = 21.0122287
+    lat2 = 52.406374
+    lon2 = 16.9251681
+    distance = geodistance(lat2, lon1, lat2, lon2)
+    print(distance)
 
 
 
@@ -105,7 +123,7 @@ def main():
     #print(co_occ_mat)
 
     #with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-        #print(df)
+    #print(df)
 
 
 

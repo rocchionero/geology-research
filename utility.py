@@ -1,6 +1,6 @@
 import csv
 import random
-from collections import Counter
+from math import sin, cos, sqrt, atan2, radians
 
 
 def write_dict(d, write_loc, col_header=[]):
@@ -97,21 +97,22 @@ def RandTaxa(dict, list):
 
     return randtaxa
 
-def ripleyfunction(dict):
-    result = {}
-    for k in result:
-        if 'bivalve' in k:
-            result[k['bivalve']] = result.get(k['bivalve'], 0) + 1
-        elif 'gastropod' in k:
-            result[k['gastropod']] = result.get(k['gastropod'], 0) + 1
-        else:
-            result[k['brachipod']] = result.get(k['brachipod'], 0) + 1
+def geodistance(lat1,lon1,lat2,lon2):
+    R = 6373.0
 
-    return result
+    lat1 = radians(lat1)
+    lon1 = radians(lon1)
+    lat2 = radians(lat2)
+    lon2 = radians(lon2)
 
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
 
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
+    distance = R * c
 
-
+    return distance
 
 

@@ -21,3 +21,6 @@ list the sites that bivalves occur
 list the sites that gasts occur
 list the sites that brachs occur
 add up number of sites in each taxa and average the value among all three
+
+calculate geographic distance between latitude and longitude for each site
+using dummy variables first 
