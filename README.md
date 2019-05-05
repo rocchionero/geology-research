@@ -23,4 +23,18 @@ list the sites that brachs occur
 add up number of sites in each taxa and average the value among all three
 
 calculate geographic distance between latitude and longitude for each site
-using dummy variables first 
+using dummy variables first
+
+week of 4/20
+iterate tasks from 4/11 100 times
+
+week of 4/25
+Calculate distance using jaccard coefficient of two sites. distance will be measured in difference of the taxonomic
+composition of two sites
+for example:
+brachipod and gastropod is found at site 76
+
+week of 5/5
+tweeked jaccard coefficient
+created lists for distances and average values of sites in each taxa
+

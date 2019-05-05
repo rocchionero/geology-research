@@ -1,6 +1,7 @@
 from utility import *
 import pandas as pd
-#import matplotlib.pylab as plt
+import matplotlib.pylab as plt
+from scipy.spatial import distance
 
 
 def main():
@@ -53,7 +54,6 @@ def main():
 
     coocc.to_csv("data/coocc.csv")
 
-
     df = pd.DataFrame(data=mat[1:], columns=mat[0])
     print(df)
     df.to_csv("data/df.csv")
@@ -68,62 +68,64 @@ def main():
     sorted_brach = sorted(brach_collect_freq.items(), key=lambda kv: -kv[1])
     print(sorted_brach)
 
-    #y,x = zip(*sorted_brach)
-    #plt.plot(y, x)
-    #plt.show()
+    y, x = zip(*sorted_brach)
+    plt.plot(y, x)
+    plt.show()
 
-    #df_biv = pd.read_csv("data/biv.csv")
-    #biv_collect = df_biv.collection_no
-    #biv_collect_freq = CountFrequency(biv_collect)
-    #sorted_biv = sorted(biv_collect_freq.items(), key=lambda kv: - kv[1])
+    df_biv = pd.read_csv("data/biv.csv")
+    biv_collect = df_biv.collection_no
+    biv_collect_freq = CountFrequency(biv_collect)
+    sorted_biv = sorted(biv_collect_freq.items(), key=lambda kv: - kv[1])
+    print(sorted_biv)
 
-    #df_gast = pd.read_csv("data/gast.csv")
-    #gast_collect = df_gast.collection_no
-    #gast_collect_freq = CountFrequency(gast_collect)
-    #sorted_gast = sorted(gast_collect_freq.items(), key=lambda kv: -kv[1])
+    df_gast = pd.read_csv("data/gast.csv")
+    gast_collect = df_gast.collection_no
+    gast_collect_freq = CountFrequency(gast_collect)
+    sorted_gast = sorted(gast_collect_freq.items(), key=lambda kv: -kv[1])
+    print(sorted_gast)
 
     taxon_list = ["brachipod", "gastropod", "bivalve"]
 
     randsite_dict = RandTaxa(sorted_brach, taxon_list)
     print(randsite_dict)
 
-    _gastropod, _bivalve, _brachipod = 0, 0, 0
-    for k, v in randsite_dict.items():
-        if "brachipod" in v:
-            _brachipod += 1
-        elif "bivalve" in v:
-            _bivalve += 1
-        elif "gastropod" in v:
-            _gastropod += 1
-    average = (_gastropod + _bivalve + _brachipod)/3
-
-
-    print("(gastro, bivalve, brachipod):= " + str(_gastropod) + ", " + str(_bivalve) + ", " + str(_brachipod))
-    print(average)
+    # print("(gastro, bivalve, brachipod):= " + str(_gastropod) + ", " + str(_bivalve) + ", " + str(_brachipod))
 
     lat1 = 52.2296756
     lon1 = 21.0122287
     lat2 = 52.406374
     lon2 = 16.9251681
-    distance = geodistance(lat2, lon1, lat2, lon2)
-    print(distance)
+
+    count = 0
+    average_list = []
+    dist_list = []
+    while count < 100:
+        dist = geodistance(lat1, lon1, lat2, lon2)
+        _gastropod, _bivalve, _brachipod = 0, 0, 0
+        for k, v in randsite_dict.items():
+            if "brachipod" in v:
+                _brachipod += 1
+            elif "bivalve" in v:
+                _bivalve += 1
+            elif "gastropod" in v:
+                _gastropod += 1
+
+        count += 1
+        average = (_gastropod + _bivalve + _brachipod) / 3
+
+        dist_list.append(dist)
+        average_list.append(average)
+    print(dist_list)
+    print(average_list)
+    
+    j_coeff1 = distance.jaccard(biv_collect_freq, brach_collect_freq)
+    j_coeff2 = distance.jaccard(brach_collect_freq, gast_collect_freq)
+    j_coeff3 = distance.jaccard(biv_collect_freq, gast_collect_freq)
+    j_coeff_total = j_coeff1 + j_coeff2 + j_coeff3
+    j_dist = 1/j_coeff_total
+    print("Jaccard Coefficient: ", j_dist)
 
 
-
-
-
-
-
-
-
-    #total = []
-
-    #df_float = df.astype(float)
-    #co_occ_mat = df_float.T.dot(df_float)
-    #print(co_occ_mat)
-
-    #with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-    #print(df)
 
 
 
